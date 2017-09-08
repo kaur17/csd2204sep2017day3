@@ -1,0 +1,1096 @@
+Setting environment for using XAMPP for Windows.
+689095@203-IMAC06 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.1.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> use testdb
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'use testdb' at line 2
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| nav                |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.03 sec)
+
+MariaDB [(none)]> use testdb;
+ERROR 1049 (42000): Unknown database 'testdb'
+MariaDB [(none)]> use nav;
+Database changed
+MariaDB [nav]> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int(5)      | YES  |     | NULL    |       |
+| snm    | varchar(25) | YES  |     | NULL    |       |
+| gender | varchar(10) | YES  |     | NULL    |       |
+| age    | int(3)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+MariaDB [nav]> select version()
+    -> ;
++-----------------+
+| version()       |
++-----------------+
+| 10.1.21-MariaDB |
++-----------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select user();
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select * from student;
++------+----------+--------+------+
+| sid  | snm      | gender | age  |
++------+----------+--------+------+
+|    1 | Navjot   | female |   22 |
+|    2 | payal    | f      |   22 |
+|    3 | Aman     | Male   |   27 |
+|    4 | Randhir  | Male   |   23 |
+|    5 | Gurpreet | Male   |   24 |
++------+----------+--------+------+
+5 rows in set (0.05 sec)
+
+MariaDB [nav]> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2017-09-07 18:03:21 |
++---------------------+
+1 row in set (0.03 sec)
+
+MariaDB [nav]> select current_date();
++----------------+
+| current_date() |
++----------------+
+| 2017-09-07     |
++----------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2017-09-07 18:03:51 |
++---------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2017-09-07 |
++------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select cur_date();
+ERROR 1305 (42000): FUNCTION nav.cur_date does not exist
+MariaDB [nav]> select systime();
+ERROR 1305 (42000): FUNCTION nav.systime does not exist
+MariaDB [nav]> curtime();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'curtime()' at line 1
+MariaDB [nav]> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 18:06:23  |
++-----------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select currenttime();
+ERROR 1305 (42000): FUNCTION nav.currenttime does not exist
+MariaDB [nav]> select current_time();
++----------------+
+| current_time() |
++----------------+
+| 18:06:45       |
++----------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select current_timestamp();
++---------------------+
+| current_timestamp() |
++---------------------+
+| 2017-09-07 18:06:59 |
++---------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select  avg(age) from student;
++----------+
+| avg(age) |
++----------+
+|  23.6000 |
++----------+
+1 row in set (0.06 sec)
+
+MariaDB [nav]> select sysdate(), avg(age) from student;
++---------------------+----------+
+| sysdate()           | avg(age) |
++---------------------+----------+
+| 2017-09-07 18:11:57 |  23.6000 |
++---------------------+----------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> select now(), * from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from student' at line 1
+MariaDB [nav]> select now() * from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from student' at line 1
+MariaDB [nav]> select now(), sid, snm from student;
++---------------------+------+----------+
+| now()               | sid  | snm      |
++---------------------+------+----------+
+| 2017-09-07 18:13:16 |    1 | Navjot   |
+| 2017-09-07 18:13:16 |    2 | payal    |
+| 2017-09-07 18:13:16 |    3 | Aman     |
+| 2017-09-07 18:13:16 |    4 | Randhir  |
+| 2017-09-07 18:13:16 |    5 | Gurpreet |
++---------------------+------+----------+
+5 rows in set (0.00 sec)
+
+MariaDB [nav]> select concat(snm,age) from student;
++-----------------+
+| concat(snm,age) |
++-----------------+
+| Navjot22        |
+| payal22         |
+| Aman27          |
+| Randhir23       |
+| Gurpreet24      |
++-----------------+
+5 rows in set (0.01 sec)
+
+MariaDB [nav]> select concat(snm, 'is'age'years old') from student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''years old') from student' at line 1
+MariaDB [nav]> select concat(snm, 'is',age'years old') from student;
+ERROR 1583 (42000): Incorrect parameters in the call to native function 'concat'
+MariaDB [nav]> select concat (snm, age,'years') rom student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'student' at line 1
+MariaDB [nav]> select concat(snm,'age-',age) from student;
++------------------------+
+| concat(snm,'age-',age) |
++------------------------+
+| Navjotage-22           |
+| payalage-22            |
+| Amanage-27             |
+| Randhirage-23          |
+| Gurpreetage-24         |
++------------------------+
+5 rows in set (0.00 sec)
+
+MariaDB [nav]> select concat(snm, 'age-',age) from student;
++-------------------------+
+| concat(snm, 'age-',age) |
++-------------------------+
+| Navjotage-22            |
+| payalage-22             |
+| Amanage-27              |
+| Randhirage-23           |
+| Gurpreetage-24          |
++-------------------------+
+5 rows in set (0.00 sec)
+
+MariaDB [nav]>  SELECT IF(0, 'true', 'false');
++------------------------+
+| IF(0, 'true', 'false') |
++------------------------+
+| false                  |
++------------------------+
+1 row in set (0.01 sec)
+
+MariaDB [nav]> SELECT IF(1, 'true', 'false');
++------------------------+
+| IF(1, 'true', 'false') |
++------------------------+
+| true                   |
++------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT IF(2, 'true', 'false');
++------------------------+
+| IF(2, 'true', 'false') |
++------------------------+
+| true                   |
++------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT IF(0 = FALSE, 'true', 'false');
++--------------------------------+
+| IF(0 = FALSE, 'true', 'false') |
++--------------------------------+
+| true                           |
++--------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]>  SELECT IF(1 = TRUE, 'true', 'false');
++-------------------------------+
+| IF(1 = TRUE, 'true', 'false') |
++-------------------------------+
+| true                          |
++-------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]>  SELECT IF(2 = TRUE, 'true', 'false');
++-------------------------------+
+| IF(2 = TRUE, 'true', 'false') |
++-------------------------------+
+| false                         |
++-------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]>  SELECT IF(2 = FALSE, 'true', 'false');
++--------------------------------+
+| IF(2 = FALSE, 'true', 'false') |
++--------------------------------+
+| false                          |
++--------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> CREATE TABLE t1 (t TIME(3), dt DATETIME(6));
+Query OK, 0 rows affected (0.38 sec)
+
+MariaDB [nav]> shoe tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'shoe tables' at line 1
+MariaDB [nav]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| nav                |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(time_col))) FROM tbl_name;
+ERROR 1146 (42S02): Table 'nav.tbl_name' doesn't exist
+MariaDB [nav]> SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM tbl_name;
+ERROR 1146 (42S02): Table 'nav.tbl_name' doesn't exist
+MariaDB [nav]> SELECT FROM_DAYS(SUM(TO_DAYS(date_col))) FROM student;
+ERROR 1054 (42S22): Unknown column 'date_col' in 'field list'
+MariaDB [nav]> ELECT HEX(CHAR(1,0)), HEX(CHAR(256));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ELECT HEX(CHAR(1,0)), HEX(CHAR(256))' at line 1
+MariaDB [nav]>  SELECT ASCII('2');
++------------+
+| ASCII('2') |
++------------+
+|         50 |
++------------+
+1 row in set (0.01 sec)
+
+MariaDB [nav]> SELECT BIN(12);
++---------+
+| BIN(12) |
++---------+
+| 1100    |
++---------+
+1 row in set (0.03 sec)
+
+MariaDB [nav]>  SELECT BIT_LENGTH('navjot');
++----------------------+
+| BIT_LENGTH('navjot') |
++----------------------+
+|                   48 |
++----------------------+
+1 row in set (0.02 sec)
+
+MariaDB [nav]> SELECT FORMAT(12332.123456, 4);
++-------------------------+
+| FORMAT(12332.123456, 4) |
++-------------------------+
+| 12,332.1235             |
++-------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]>  SELECT TO_BASE64('abc'), FROM_BASE64(TO_BASE64('abc'));
++------------------+-------------------------------+
+| TO_BASE64('abc') | FROM_BASE64(TO_BASE64('abc')) |
++------------------+-------------------------------+
+| YWJj             | abc                           |
++------------------+-------------------------------+
+1 row in set (0.05 sec)
+
+MariaDB [nav]>  SELECT FORMAT(12332.2,0);
++-------------------+
+| FORMAT(12332.2,0) |
++-------------------+
+| 12,332            |
++-------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT FORMAT(12332.2,2,'de_DE');
++---------------------------+
+| FORMAT(12332.2,2,'de_DE') |
++---------------------------+
+| 12.332,20                 |
++---------------------------+
+1 row in set (0.03 sec)
+
+MariaDB [nav]> SELECT FORMAT(12332.2,2,'en_NZ');
++---------------------------+
+| FORMAT(12332.2,2,'en_NZ') |
++---------------------------+
+| 12,332.20                 |
++---------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT DATE_FORMAT('2010-01-01','%W %a %M %b');
++-----------------------------------------+
+| DATE_FORMAT('2010-01-01','%W %a %M %b') |
++-----------------------------------------+
+| Friday Fri January Jan                  |
++-----------------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> show create table student\G
+*************************** 1. row ***************************
+       Table: student
+Create Table: CREATE TABLE `student` (
+  `sid` int(5) DEFAULT NULL,
+  `snm` varchar(25) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+1 row in set (0.00 sec)
+
+MariaDB [nav]> show create table student\G
+*************************** 1. row ***************************
+       Table: student
+Create Table: CREATE TABLE `student` (
+  `sid` int(5) DEFAULT NULL,
+  `snm` varchar(25) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+1 row in set (0.00 sec)
+
+MariaDB [nav]> show create table student\G;
+*************************** 1. row ***************************
+       Table: student
+Create Table: CREATE TABLE `student` (
+  `sid` int(5) DEFAULT NULL,
+  `snm` varchar(25) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+1 row in set (0.00 sec)
+
+ERROR: No query specified
+
+MariaDB [nav]> create table manufacturer(
+    -> code int(5) PRIMARY KEY,
+    -> Name varchar(30) NOT NULL);
+Query OK, 0 rows affected (0.34 sec)
+
+MariaDB [nav]> SHOW TABLE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [nav]> SHOW table manufacturer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'manufacturer' at line 1
+MariaDB [nav]> desc manufacturer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int(5)      | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [nav]> create table manf(
+    -> code int(3),
+    -> name varchar(20) not null,
+    -> primary key(code));
+Query OK, 0 rows affected (0.27 sec)
+
+MariaDB [nav]> desc manf;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int(3)      | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [nav]> create table product(
+    -> code int(3),
+    -> nam varchar(20) not null,
+    -> primary key(code),
+    -> price float(9,2
+    -> ),
+    -> manufctr int(3) references(manufacturer,code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(manufacturer,code))' at line 7
+MariaDB [nav]> desc product;
+ERROR 1146 (42S02): Table 'nav.product' doesn't exist
+MariaDB [nav]>  create table product(
+    ->     -> code int(3),
+    ->     -> nam varchar(20) not null,
+    ->     -> primary key(code),
+    ->     -> price float(9,2
+    ->     -> ),
+    ->     -> MANFCTRE INT(3),
+    -> FOREIGN KEY MANFCTRE REFERENCES manufacturer(code);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-> code int(3),
+    -> nam varchar(20) not null,
+    -> primary key(code),
+    -' at line 2
+MariaDB [nav]> desc product;
+ERROR 1146 (42S02): Table 'nav.product' doesn't exist
+MariaDB [nav]> desc manufacturer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int(5)      | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [nav]> create table product(
+    -> code int(5) primary key,
+    -> name varchar(30) not null,
+    -> price float(9,2),
+    -> foreign key manfctre references manufacturer(code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'references manufacturer(code))' at line 5
+MariaDB [nav]>  create table product(
+    ->     -> code int(5) primary key,
+    ->     -> name varchar(30) not null,
+    ->     -> price float(9,2),
+    ->     -> foreign key (manfctre) references manufacturer(code));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-> code int(5) primary key,
+    -> name varchar(30) not null,
+    -> price float' at line 2
+MariaDB [nav]> desc product;
+ERROR 1146 (42S02): Table 'nav.product' doesn't exist
+MariaDB [nav]> desc manufacturer;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| code  | int(5)      | NO   | PRI | NULL    |       |
+| Name  | varchar(30) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [nav]> CREATE TABLE Manufacturers ( Code INTEGER, Name VARCHAR(255) NOT NULL, PRIMARY KEY (Code)   );
+Query OK, 0 rows affected (0.22 sec)
+
+MariaDB [nav]> desc Manufacturers;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| Code  | int(11)      | NO   | PRI | NULL    |       |
+| Name  | varchar(255) | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+MariaDB [nav]> CREATE TABLE Products ( Code INTEGER, Name VARCHAR(255) NOT NULL , Price DECIMAL NOT NULL , Manufacturer INTEGER NOT NULL, PRIMARY KEY (Code), FOREIGN KEY (Manufacturer) REFERENCES Manufacturers(Code)) ;
+Query OK, 0 rows affected (0.25 sec)
+
+MariaDB [nav]> dec Products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dec Products' at line 1
+MariaDB [nav]> desc Products;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| Code         | int(11)       | NO   | PRI | NULL    |       |
+| Name         | varchar(255)  | NO   |     | NULL    |       |
+| Price        | decimal(10,0) | NO   |     | NULL    |       |
+| Manufacturer | int(11)       | NO   | MUL | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MariaDB [nav]> INSERT INTO Manufacturers(Code,Name) VALUES(1,'Sony');INSERT INTO Manufacturers(Code,Name) VALUES(2,'Creative Labs');INSERT INTO Manufacturers(Code,Name) VALUES(3,'Hewlett-Packard');INSERT INTO Manufacturers(Code,Name) VALUES(4,'Iomega');INSERT INTO Manufacturers(Code,Name) VALUES(5,'Fujitsu');INSERT INTO Manufacturers(Code,Name) VALUES(6,'Winchester');
+Query OK, 1 row affected (0.06 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.06 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.02 sec)
+
+MariaDB [nav]> select * from Manufacturers;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
++------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [nav]> INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(1,'Hard drive',240,5);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(2,'Memory',120,6);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(3,'ZIP drive',150,4);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(4,'Floppy disk',5,6);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(5,'Monitor',240,1);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(6,'DVD drive',180,2);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(7,'CD drive',90,2);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(8,'Printer',270,3);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(9,'Toner cartridge',66,3);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(10,'DVD burner',180,2);
+Query OK, 1 row affected (0.06 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.08 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.02 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.02 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+Query OK, 1 row affected (0.02 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [nav]> desc Products;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| Code         | int(11)       | NO   | PRI | NULL    |       |
+| Name         | varchar(255)  | NO   |     | NULL    |       |
+| Price        | decimal(10,0) | NO   |     | NULL    |       |
+| Manufacturer | int(11)       | NO   | MUL | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MariaDB [nav]> select * from Products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   240 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> select Name from Products;
++-----------------+
+| Name            |
++-----------------+
+| Hard drive      |
+| Memory          |
+| ZIP drive       |
+| Floppy disk     |
+| Monitor         |
+| DVD drive       |
+| CD drive        |
+| Printer         |
+| Toner cartridge |
+| DVD burner      |
++-----------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT name, price FROM Products;
++-----------------+-------+
+| name            | price |
++-----------------+-------+
+| Hard drive      |   240 |
+| Memory          |   120 |
+| ZIP drive       |   150 |
+| Floppy disk     |     5 |
+| Monitor         |   240 |
+| DVD drive       |   180 |
+| CD drive        |    90 |
+| Printer         |   270 |
+| Toner cartridge |    66 |
+| DVD burner      |   180 |
++-----------------+-------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT price FROM Products WHERE price*100;
++-------+
+| price |
++-------+
+|   240 |
+|   120 |
+|   150 |
+|     5 |
+|   240 |
+|   180 |
+|    90 |
+|   270 |
+|    66 |
+|   180 |
++-------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT name, price FROM Products WHERE price*100;
++-----------------+-------+
+| name            | price |
++-----------------+-------+
+| Hard drive      |   240 |
+| Memory          |   120 |
+| ZIP drive       |   150 |
+| Floppy disk     |     5 |
+| Monitor         |   240 |
+| DVD drive       |   180 |
+| CD drive        |    90 |
+| Printer         |   270 |
+| Toner cartridge |    66 |
+| DVD burner      |   180 |
++-----------------+-------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> select * from Products WHERE price*100;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   240 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT name, price*100 FROM Products;
++-----------------+-----------+
+| name            | price*100 |
++-----------------+-----------+
+| Hard drive      |     24000 |
+| Memory          |     12000 |
+| ZIP drive       |     15000 |
+| Floppy disk     |       500 |
+| Monitor         |     24000 |
+| DVD drive       |     18000 |
+| CD drive        |      9000 |
+| Printer         |     27000 |
+| Toner cartridge |      6600 |
+| DVD burner      |     18000 |
++-----------------+-----------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]>  SELECT PRICE FROM PRODUCTS WHERE PRICE BETWEEN 60 AND 200;
++-------+
+| PRICE |
++-------+
+|   120 |
+|   150 |
+|   180 |
+|    90 |
+|    66 |
+|   180 |
++-------+
+6 rows in set (0.00 sec)
+
+MariaDB [nav]>  SELECT PRICE FROM PRODUCTS WHERE PRICE<=200;
++-------+
+| PRICE |
++-------+
+|   120 |
+|   150 |
+|     5 |
+|   180 |
+|    90 |
+|    66 |
+|   180 |
++-------+
+7 rows in set (0.05 sec)
+
+MariaDB [nav]> SELECT price*52.13 FROM Products;
++-------------+
+| price*52.13 |
++-------------+
+|    12511.20 |
+|     6255.60 |
+|     7819.50 |
+|      260.65 |
+|    12511.20 |
+|     9383.40 |
+|     4691.70 |
+|    14075.10 |
+|     3440.58 |
+|     9383.40 |
++-------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT CONCAT ('$',PRICE), CONCAT(PRICE*100,'CENTS') FROM PRODUCTS;
++--------------------+---------------------------+
+| CONCAT ('$',PRICE) | CONCAT(PRICE*100,'CENTS') |
++--------------------+---------------------------+
+| $240               | 24000CENTS                |
+| $120               | 12000CENTS                |
+| $150               | 15000CENTS                |
+| $5                 | 500CENTS                  |
+| $240               | 24000CENTS                |
+| $180               | 18000CENTS                |
+| $90                | 9000CENTS                 |
+| $270               | 27000CENTS                |
+| $66                | 6600CENTS                 |
+| $180               | 18000CENTS                |
++--------------------+---------------------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT NAME CONCAT ('$',PRICE), CONCAT(PRICE*100,'CENTS') FROM PRODUCTS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('$',PRICE), CONCAT(PRICE*100,'CENTS') FROM PRODUCTS' at line 1
+MariaDB [nav]> SELECT name, CONCAT('$',PRICE), CONCAT(PRICE*100,'CENTS') FROM PRODUCTS;
++-----------------+-------------------+---------------------------+
+| name            | CONCAT('$',PRICE) | CONCAT(PRICE*100,'CENTS') |
++-----------------+-------------------+---------------------------+
+| Hard drive      | $240              | 24000CENTS                |
+| Memory          | $120              | 12000CENTS                |
+| ZIP drive       | $150              | 15000CENTS                |
+| Floppy disk     | $5                | 500CENTS                  |
+| Monitor         | $240              | 24000CENTS                |
+| DVD drive       | $180              | 18000CENTS                |
+| CD drive        | $90               | 9000CENTS                 |
+| Printer         | $270              | 27000CENTS                |
+| Toner cartridge | $66               | 6600CENTS                 |
+| DVD burner      | $180              | 18000CENTS                |
++-----------------+-------------------+---------------------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT AVG(PRICE) FROM PRODUCTS;
++------------+
+| AVG(PRICE) |
++------------+
+|   154.1000 |
++------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT COUNT(PRICE) FROM PRODUCTS;
++--------------+
+| COUNT(PRICE) |
++--------------+
+|           10 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT SUM(PRICE)/COUNT(PRICE) FROM PRODUCTS;
++-------------------------+
+| SUM(PRICE)/COUNT(PRICE) |
++-------------------------+
+|                154.1000 |
++-------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT MIN(PRICE) FROM PRODUCTS;
++------------+
+| MIN(PRICE) |
++------------+
+|          5 |
++------------+
+1 row in set (0.02 sec)
+
+MariaDB [nav]> SELECT MAX(PRICE) FROM PRODUCTS;
++------------+
+| MAX(PRICE) |
++------------+
+|        270 |
++------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT AVG(PRICE) FROM PRODUCTS WHERE CODE=2;
++------------+
+| AVG(PRICE) |
++------------+
+|   120.0000 |
++------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT AVG(PRICE) FROM PRODUCTS WHERE MANUFACTURER=2;
++------------+
+| AVG(PRICE) |
++------------+
+|   150.0000 |
++------------+
+1 row in set (0.06 sec)
+
+MariaDB [nav]> SELECT COUNT(PRICE) FROM PRODUCTS WHERE PRICE>=150;
++--------------+
+| COUNT(PRICE) |
++--------------+
+|            6 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> SELECT * FROM PRODUCTS;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   240 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT NAME FROM PRODUCTS ORDER BY NAME ;
++-----------------+
+| NAME            |
++-----------------+
+| CD drive        |
+| DVD burner      |
+| DVD drive       |
+| Floppy disk     |
+| Hard drive      |
+| Memory          |
+| Monitor         |
+| Printer         |
+| Toner cartridge |
+| ZIP drive       |
++-----------------+
+10 rows in set (0.03 sec)
+
+MariaDB [nav]> SELECT NAME FROM PRODUCTS ORDER BY NAME ASC;
++-----------------+
+| NAME            |
++-----------------+
+| CD drive        |
+| DVD burner      |
+| DVD drive       |
+| Floppy disk     |
+| Hard drive      |
+| Memory          |
+| Monitor         |
+| Printer         |
+| Toner cartridge |
+| ZIP drive       |
++-----------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT NAME FROM PRODUCTS ORDER BY NAME DESC;
++-----------------+
+| NAME            |
++-----------------+
+| ZIP drive       |
+| Toner cartridge |
+| Printer         |
+| Monitor         |
+| Memory          |
+| Hard drive      |
+| Floppy disk     |
+| DVD drive       |
+| DVD burner      |
+| CD drive        |
++-----------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT NAME FROM PRODUCTS ORDER BY NAME, MANUFATURER DESC;
+ERROR 1054 (42S22): Unknown column 'MANUFATURER' in 'order clause'
+MariaDB [nav]> SELECT * FROM PRODUCTS ORDER BY NAME, MANUFATURER DESC;
+ERROR 1054 (42S22): Unknown column 'MANUFATURER' in 'order clause'
+MariaDB [nav]> SELECT * FROM PRODUCTS ORDER BY Manufacturer DESC, NAME;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    4 | Floppy disk     |     5 |            6 |
+|    2 | Memory          |   120 |            6 |
+|    1 | Hard drive      |   240 |            5 |
+|    3 | ZIP drive       |   150 |            4 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|    7 | CD drive        |    90 |            2 |
+|   10 | DVD burner      |   180 |            2 |
+|    6 | DVD drive       |   180 |            2 |
+|    5 | Monitor         |   240 |            1 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT * FROM PRODUCTS ORDER BY NAME DESC, Manufacturer;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    3 | ZIP drive       |   150 |            4 |
+|    9 | Toner cartridge |    66 |            3 |
+|    8 | Printer         |   270 |            3 |
+|    5 | Monitor         |   240 |            1 |
+|    2 | Memory          |   120 |            6 |
+|    1 | Hard drive      |   240 |            5 |
+|    4 | Floppy disk     |     5 |            6 |
+|    6 | DVD drive       |   180 |            2 |
+|   10 | DVD burner      |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> SELECT * FROM PRODUCTS WHERE NAME LIKE 'DRIVE';
+Empty set (0.03 sec)
+
+MariaDB [nav]> SELECT NAME FROM PRODUCTS WHERE NAME LIKE '%DRIVE%';
++------------+
+| NAME       |
++------------+
+| Hard drive |
+| ZIP drive  |
+| DVD drive  |
+| CD drive   |
++------------+
+4 rows in set (0.00 sec)
+
+MariaDB [nav]> UPDATE PRODUCT SET PRICE=250 WHERE NAME="HARD DRIVE";
+ERROR 1146 (42S02): Table 'nav.product' doesn't exist
+MariaDB [nav]> UPDATE PRODUCTS SET PRICE=250 WHERE NAME="HARD DRIVE";
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nav]> SELECT * FROM PRODUCTS WHERE NAME="HARD DRIVE";
++------+------------+-------+--------------+
+| Code | Name       | Price | Manufacturer |
++------+------------+-------+--------------+
+|    1 | Hard drive |   250 |            5 |
++------+------------+-------+--------------+
+1 row in set (0.00 sec)
+
+MariaDB [nav]> UPDATE PRODUCTS SET price =500 WHERE NAME = 'Hard drive';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nav]> select * from products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [nav]> UPDATE PRODUCTS SET MANUFACTURER=7 WHERE CODE=1;
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`nav`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+MariaDB [nav]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
++------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(11,'USB DRIVE',230,7);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`nav`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(11,'USB DRIVE',230, NULL);
+ERROR 1048 (23000): Column 'Manufacturer' cannot be null
+MariaDB [nav]> DELETE FROM MANUFACTURES WHERE CODE=1;
+ERROR 1146 (42S02): Table 'nav.manufactures' doesn't exist
+MariaDB [nav]> DELETE FROM MANUFACTURERS WHERE CODE=1;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`nav`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+MariaDB [nav]> INSERT INTO MANUFACTURERS VALUES(7,'Mac');
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [nav]> select * from manufacturers;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    7 | Mac             |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [nav]> DELETE FROM MANUFACTURERS WHERE CODE=7;
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [nav]> select * from manufacturers;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
++------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [nav]> INSERT INTO MANUFACTURERS VALUES(8,'MACINTOSH');
+Query OK, 1 row affected (0.06 sec)
+
+MariaDB [nav]> select * from manufacturers;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    8 | MACINTOSH       |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(9,'LAPTOP',200);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(9,'LAPTOP',NULL);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(9,'LAPTOP');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(11,'LAPTOP');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(12,'LAPTOP');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [nav]> INSERT INTO PRODUCTS VALUES(12,'LAPTOP', 200, 9);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`nav`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+MariaDB [nav]> select * from products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
