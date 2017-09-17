@@ -1,0 +1,1036 @@
+Setting environment for using XAMPP for Windows.
+navjo@DESKTOP-SJ4S0JU c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| examc0689095       |
+| information_schema |
+| mysql              |
+| mytestdb           |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.03 sec)
+
+MariaDB [(none)]> USE mytestdb;
+Database changed
+MariaDB [mytestdb]> SHOW TABLES;
+Empty set (0.00 sec)
+
+MariaDB [mytestdb]> CREATE TABLE Manufacturers ( Code INTEGER, Name VARCHAR(255) NOT NULL, PRIMARY KEY (Code)   );
+Query OK, 0 rows affected (0.08 sec)
+
+MariaDB [mytestdb]> CREATE TABLE Products ( Code INTEGER, Name VARCHAR(255) NOT NULL , Price DECIMAL NOT NULL , Manufacturer INTEGER NOT NULL, PRIMARY KEY (Code), FOREIGN KEY (Manufacturer) REFERENCES Manufacturers(Code)) ;
+Query OK, 0 rows affected (0.07 sec)
+
+MariaDB [mytestdb]> INSERT INTO Manufacturers(Code,Name) VALUES(1,'Sony');INSERT INTO Manufacturers(Code,Name) VALUES(2,'Creative Labs');INSERT INTO Manufacturers(Code,Name) VALUES(3,'Hewlett-Packard');INSERT INTO Manufacturers(Code,Name) VALUES(4,'Iomega');INSERT INTO Manufacturers(Code,Name) VALUES(5,'Fujitsu');INSERT INTO Manufacturers(Code,Name) VALUES(6,'Winchester');
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Manufacturers;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
++------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(1,'Hard drive',240,5);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(2,'Memory',120,6);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(3,'ZIP drive',150,4);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(4,'Floppy disk',5,6);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(5,'Monitor',240,1);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(6,'DVD drive',180,2);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(7,'CD drive',90,2);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(8,'Printer',270,3);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(9,'Toner cartridge',66,3);INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(10,'DVD burner',180,2);
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   240 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT name FROM Products;
++-----------------+
+| name            |
++-----------------+
+| Hard drive      |
+| Memory          |
+| ZIP drive       |
+| Floppy disk     |
+| Monitor         |
+| DVD drive       |
+| CD drive        |
+| Printer         |
+| Toner cartridge |
+| DVD burner      |
++-----------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT name, price from Products;
++-----------------+-------+
+| name            | price |
++-----------------+-------+
+| Hard drive      |   240 |
+| Memory          |   120 |
+| ZIP drive       |   150 |
+| Floppy disk     |     5 |
+| Monitor         |   240 |
+| DVD drive       |   180 |
+| CD drive        |    90 |
+| Printer         |   270 |
+| Toner cartridge |    66 |
+| DVD burner      |   180 |
++-----------------+-------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Products WHERE price<=200;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+7 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT name FROM Products WHERE price<=200;
++-----------------+
+| name            |
++-----------------+
+| Memory          |
+| ZIP drive       |
+| Floppy disk     |
+| DVD drive       |
+| CD drive        |
+| Toner cartridge |
+| DVD burner      |
++-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Products WHERE price BETWEEN(60 AND 120);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [mytestdb]> SELECT * FROM Products WHERE price BETWEEN 60 AND 120;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    2 | Memory          |   120 |            6 |
+|    7 | CD drive        |    90 |            2 |
+|    9 | Toner cartridge |    66 |            3 |
++------+-----------------+-------+--------------+
+3 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT name , price*100 from products;
++-----------------+-----------+
+| name            | price*100 |
++-----------------+-----------+
+| Hard drive      |     24000 |
+| Memory          |     12000 |
+| ZIP drive       |     15000 |
+| Floppy disk     |       500 |
+| Monitor         |     24000 |
+| DVD drive       |     18000 |
+| CD drive        |      9000 |
+| Printer         |     27000 |
+| Toner cartridge |      6600 |
+| DVD burner      |     18000 |
++-----------------+-----------+
+10 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT avg(price) from products;
++------------+
+| avg(price) |
++------------+
+|   154.1000 |
++------------+
+1 row in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT avg(price) as Average_price from products;
++---------------+
+| Average_price |
++---------------+
+|      154.1000 |
++---------------+
+1 row in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT avg(price) as Average_price from products where manufacturer=2;
++---------------+
+| Average_price |
++---------------+
+|      150.0000 |
++---------------+
+1 row in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT count(price) from products where price>=150;
++--------------+
+| count(price) |
++--------------+
+|            6 |
++--------------+
+1 row in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Products where name like '%drive%';
++------+------------+-------+--------------+
+| Code | Name       | Price | Manufacturer |
++------+------------+-------+--------------+
+|    1 | Hard drive |   240 |            5 |
+|    3 | ZIP drive  |   150 |            4 |
+|    6 | DVD drive  |   180 |            2 |
+|    7 | CD drive   |    90 |            2 |
++------+------------+-------+--------------+
+4 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT NAME FROM Products where name like '%drive%';
++------------+
+| NAME       |
++------------+
+| Hard drive |
+| ZIP drive  |
+| DVD drive  |
+| CD drive   |
++------------+
+4 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM Products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   240 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> UPDATE PRODUCTS SET PRICE=500 WHERE NAME='HARD DRIVE';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [mytestdb]> SELECT * FROM Products;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> CREATE TABLE STUDENT (STUDENT_ID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,FIRSTNAME VARCHAR(50) NOT NULL,LASTNAME VARCHAR(50) NOT NULL,GENDER VARCHAR(50) NOT NULL,DOB DATE,CITY VARCHAR(30) NOT NULL,COUNTRY VARCHAR(50) NOT NULL,AGE SMALLINT(3) NOT NULL,COURSE VARCHAR(50) DEFAULT 'MADT',STATUS CHAR(1) DEFAULT 'A',DOJ TIMESTAMP DEFAULT CURRENT_TIMESTAMP,MARKS BIGINT(5),YEARIFPASSING YEAR );
+Query OK, 0 rows affected (0.12 sec)
+
+MariaDB [mytestdb]> DESC STUDENT;
++---------------+-------------+------+-----+-------------------+----------------+
+| Field         | Type        | Null | Key | Default           | Extra          |
++---------------+-------------+------+-----+-------------------+----------------+
+| STUDENT_ID    | int(10)     | NO   | PRI | NULL              | auto_increment |
+| FIRSTNAME     | varchar(50) | NO   |     | NULL              |                |
+| LASTNAME      | varchar(50) | NO   |     | NULL              |                |
+| GENDER        | varchar(50) | NO   |     | NULL              |                |
+| DOB           | date        | YES  |     | NULL              |                |
+| CITY          | varchar(30) | NO   |     | NULL              |                |
+| COUNTRY       | varchar(50) | NO   |     | NULL              |                |
+| AGE           | smallint(3) | NO   |     | NULL              |                |
+| COURSE        | varchar(50) | YES  |     | MADT              |                |
+| STATUS        | char(1)     | YES  |     | A                 |                |
+| DOJ           | timestamp   | NO   |     | CURRENT_TIMESTAMP |                |
+| MARKS         | bigint(5)   | YES  |     | NULL              |                |
+| YEARIFPASSING | year(4)     | YES  |     | NULL              |                |
++---------------+-------------+------+-----+-------------------+----------------+
+13 rows in set (0.02 sec)
+
+MariaDB [mytestdb]> INSERT INTO STUDENT VALUES (1,'KALPANA','RAMANAN','FEMALE','1990-05-17','TORONTO','CANADA',28,'MADT','A',CURRENT_TIMESTAMP(),97,2017);INSERT INTO STUDENT VALUES (2,'SAI','PRAVEEN','MALE','1993-07-06','PETEBOROUGH','CANADA',24,'BIG DATA','A',CURRENT_TIMESTAMP(),98,2017);INSERT INTO STUDENT VALUES (3,'MANOCH','RICHARD','MALE','1988-03-24','BRAMPTON','CANADA',28,'MIOS','A',CURRENT_TIMESTAMP(),40,2015);INSERT INTO STUDENT VALUES (4,'SARANYA','SEKAR','FEMALE','1992-07-18','TORONTO','CANADA',28,'MAPT','A',CURRENT_TIMESTAMP(),75,2016);INSERT INTO STUDENT VALUES (5,'NIMISHA','RAKASH','FEMALE','1991-02-08','BRAMPTON','CANADA',28,'CPMT','A',CURRENT_TIMESTAMP(),67,2016);
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM STUDENTS;
+ERROR 1146 (42S02): Table 'mytestdb.students' doesn't exist
+MariaDB [mytestdb]> SELECT * FROM STUDENT;
++------------+-----------+----------+--------+------------+-------------+---------+-----+----------+--------+---------------------+-------+---------------+
+| STUDENT_ID | FIRSTNAME | LASTNAME | GENDER | DOB        | CITY        | COUNTRY | AGE | COURSE   | STATUS | DOJ                 | MARKS | YEARIFPASSING |
++------------+-----------+----------+--------+------------+-------------+---------+-----+----------+--------+---------------------+-------+---------------+
+|          1 | KALPANA   | RAMANAN  | FEMALE | 1990-05-17 | TORONTO     | CANADA  |  28 | MADT     | A      | 2017-09-16 15:26:37 |    97 |          2017 |
+|          2 | SAI       | PRAVEEN  | MALE   | 1993-07-06 | PETEBOROUGH | CANADA  |  24 | BIG DATA | A      | 2017-09-16 15:26:37 |    98 |          2017 |
+|          3 | MANOCH    | RICHARD  | MALE   | 1988-03-24 | BRAMPTON    | CANADA  |  28 | MIOS     | A      | 2017-09-16 15:26:37 |    40 |          2015 |
+|          4 | SARANYA   | SEKAR    | FEMALE | 1992-07-18 | TORONTO     | CANADA  |  28 | MAPT     | A      | 2017-09-16 15:26:37 |    75 |          2016 |
+|          5 | NIMISHA   | RAKASH   | FEMALE | 1991-02-08 | BRAMPTON    | CANADA  |  28 | CPMT     | A      | 2017-09-16 15:26:37 |    67 |          2016 |
++------------+-----------+----------+--------+------------+-------------+---------+-----+----------+--------+---------------------+-------+---------------+
+5 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SHOW TABLES;
++--------------------+
+| Tables_in_mytestdb |
++--------------------+
+| manufacturers      |
+| products           |
+| student            |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM PRODUCTS;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
++------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
++------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM manufacturers m JOIN products p ON m.code = p.manufacturer;
++------+-----------------+------+-----------------+-------+--------------+
+| Code | Name            | Code | Name            | Price | Manufacturer |
++------+-----------------+------+-----------------+-------+--------------+
+|    5 | Fujitsu         |    1 | Hard drive      |   500 |            5 |
+|    6 | Winchester      |    2 | Memory          |   120 |            6 |
+|    4 | Iomega          |    3 | ZIP drive       |   150 |            4 |
+|    6 | Winchester      |    4 | Floppy disk     |     5 |            6 |
+|    1 | Sony            |    5 | Monitor         |   240 |            1 |
+|    2 | Creative Labs   |    6 | DVD drive       |   180 |            2 |
+|    2 | Creative Labs   |    7 | CD drive        |    90 |            2 |
+|    3 | Hewlett-Packard |    8 | Printer         |   270 |            3 |
+|    3 | Hewlett-Packard |    9 | Toner cartridge |    66 |            3 |
+|    2 | Creative Labs   |   10 | DVD burner      |   180 |            2 |
++------+-----------------+------+-----------------+-------+--------------+
+10 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT * FROM manufacturers m, products p WHERE m.code = p.manufacturer;
++------+-----------------+------+-----------------+-------+--------------+
+| Code | Name            | Code | Name            | Price | Manufacturer |
++------+-----------------+------+-----------------+-------+--------------+
+|    5 | Fujitsu         |    1 | Hard drive      |   500 |            5 |
+|    6 | Winchester      |    2 | Memory          |   120 |            6 |
+|    4 | Iomega          |    3 | ZIP drive       |   150 |            4 |
+|    6 | Winchester      |    4 | Floppy disk     |     5 |            6 |
+|    1 | Sony            |    5 | Monitor         |   240 |            1 |
+|    2 | Creative Labs   |    6 | DVD drive       |   180 |            2 |
+|    2 | Creative Labs   |    7 | CD drive        |    90 |            2 |
+|    3 | Hewlett-Packard |    8 | Printer         |   270 |            3 |
+|    3 | Hewlett-Packard |    9 | Toner cartridge |    66 |            3 |
+|    2 | Creative Labs   |   10 | DVD burner      |   180 |            2 |
++------+-----------------+------+-----------------+-------+--------------+
+10 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS, PRODUCTS;
++------+-----------------+------+-----------------+-------+--------------+
+| Code | Name            | Code | Name            | Price | Manufacturer |
++------+-----------------+------+-----------------+-------+--------------+
+|    1 | Sony            |    1 | Hard drive      |   500 |            5 |
+|    2 | Creative Labs   |    1 | Hard drive      |   500 |            5 |
+|    3 | Hewlett-Packard |    1 | Hard drive      |   500 |            5 |
+|    4 | Iomega          |    1 | Hard drive      |   500 |            5 |
+|    5 | Fujitsu         |    1 | Hard drive      |   500 |            5 |
+|    6 | Winchester      |    1 | Hard drive      |   500 |            5 |
+|    1 | Sony            |    2 | Memory          |   120 |            6 |
+|    2 | Creative Labs   |    2 | Memory          |   120 |            6 |
+|    3 | Hewlett-Packard |    2 | Memory          |   120 |            6 |
+|    4 | Iomega          |    2 | Memory          |   120 |            6 |
+|    5 | Fujitsu         |    2 | Memory          |   120 |            6 |
+|    6 | Winchester      |    2 | Memory          |   120 |            6 |
+|    1 | Sony            |    3 | ZIP drive       |   150 |            4 |
+|    2 | Creative Labs   |    3 | ZIP drive       |   150 |            4 |
+|    3 | Hewlett-Packard |    3 | ZIP drive       |   150 |            4 |
+|    4 | Iomega          |    3 | ZIP drive       |   150 |            4 |
+|    5 | Fujitsu         |    3 | ZIP drive       |   150 |            4 |
+|    6 | Winchester      |    3 | ZIP drive       |   150 |            4 |
+|    1 | Sony            |    4 | Floppy disk     |     5 |            6 |
+|    2 | Creative Labs   |    4 | Floppy disk     |     5 |            6 |
+|    3 | Hewlett-Packard |    4 | Floppy disk     |     5 |            6 |
+|    4 | Iomega          |    4 | Floppy disk     |     5 |            6 |
+|    5 | Fujitsu         |    4 | Floppy disk     |     5 |            6 |
+|    6 | Winchester      |    4 | Floppy disk     |     5 |            6 |
+|    1 | Sony            |    5 | Monitor         |   240 |            1 |
+|    2 | Creative Labs   |    5 | Monitor         |   240 |            1 |
+|    3 | Hewlett-Packard |    5 | Monitor         |   240 |            1 |
+|    4 | Iomega          |    5 | Monitor         |   240 |            1 |
+|    5 | Fujitsu         |    5 | Monitor         |   240 |            1 |
+|    6 | Winchester      |    5 | Monitor         |   240 |            1 |
+|    1 | Sony            |    6 | DVD drive       |   180 |            2 |
+|    2 | Creative Labs   |    6 | DVD drive       |   180 |            2 |
+|    3 | Hewlett-Packard |    6 | DVD drive       |   180 |            2 |
+|    4 | Iomega          |    6 | DVD drive       |   180 |            2 |
+|    5 | Fujitsu         |    6 | DVD drive       |   180 |            2 |
+|    6 | Winchester      |    6 | DVD drive       |   180 |            2 |
+|    1 | Sony            |    7 | CD drive        |    90 |            2 |
+|    2 | Creative Labs   |    7 | CD drive        |    90 |            2 |
+|    3 | Hewlett-Packard |    7 | CD drive        |    90 |            2 |
+|    4 | Iomega          |    7 | CD drive        |    90 |            2 |
+|    5 | Fujitsu         |    7 | CD drive        |    90 |            2 |
+|    6 | Winchester      |    7 | CD drive        |    90 |            2 |
+|    1 | Sony            |    8 | Printer         |   270 |            3 |
+|    2 | Creative Labs   |    8 | Printer         |   270 |            3 |
+|    3 | Hewlett-Packard |    8 | Printer         |   270 |            3 |
+|    4 | Iomega          |    8 | Printer         |   270 |            3 |
+|    5 | Fujitsu         |    8 | Printer         |   270 |            3 |
+|    6 | Winchester      |    8 | Printer         |   270 |            3 |
+|    1 | Sony            |    9 | Toner cartridge |    66 |            3 |
+|    2 | Creative Labs   |    9 | Toner cartridge |    66 |            3 |
+|    3 | Hewlett-Packard |    9 | Toner cartridge |    66 |            3 |
+|    4 | Iomega          |    9 | Toner cartridge |    66 |            3 |
+|    5 | Fujitsu         |    9 | Toner cartridge |    66 |            3 |
+|    6 | Winchester      |    9 | Toner cartridge |    66 |            3 |
+|    1 | Sony            |   10 | DVD burner      |   180 |            2 |
+|    2 | Creative Labs   |   10 | DVD burner      |   180 |            2 |
+|    3 | Hewlett-Packard |   10 | DVD burner      |   180 |            2 |
+|    4 | Iomega          |   10 | DVD burner      |   180 |            2 |
+|    5 | Fujitsu         |   10 | DVD burner      |   180 |            2 |
+|    6 | Winchester      |   10 | DVD burner      |   180 |            2 |
++------+-----------------+------+-----------------+-------+--------------+
+60 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT P.NAME AS PRODUCT_NAME,P.PRICE AS PRODUCT_PRICE,M.NAME AS MANUFACTURE_NAME FROM PRODUCTS P,MANUFACTURERS M WHERE P.MANUFACTURER=M.CODE;
++-----------------+---------------+------------------+
+| PRODUCT_NAME    | PRODUCT_PRICE | MANUFACTURE_NAME |
++-----------------+---------------+------------------+
+| Hard drive      |           500 | Fujitsu          |
+| Memory          |           120 | Winchester       |
+| ZIP drive       |           150 | Iomega           |
+| Floppy disk     |             5 | Winchester       |
+| Monitor         |           240 | Sony             |
+| DVD drive       |           180 | Creative Labs    |
+| CD drive        |            90 | Creative Labs    |
+| Printer         |           270 | Hewlett-Packard  |
+| Toner cartridge |            66 | Hewlett-Packard  |
+| DVD burner      |           180 | Creative Labs    |
++-----------------+---------------+------------------+
+10 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT * FROM manufacturers m LEFT OUTER JOIN products p ON m.code = p.manufacturer;
++------+-----------------+------+-----------------+-------+--------------+
+| Code | Name            | Code | Name            | Price | Manufacturer |
++------+-----------------+------+-----------------+-------+--------------+
+|    1 | Sony            |    5 | Monitor         |   240 |            1 |
+|    2 | Creative Labs   |    6 | DVD drive       |   180 |            2 |
+|    2 | Creative Labs   |    7 | CD drive        |    90 |            2 |
+|    2 | Creative Labs   |   10 | DVD burner      |   180 |            2 |
+|    3 | Hewlett-Packard |    8 | Printer         |   270 |            3 |
+|    3 | Hewlett-Packard |    9 | Toner cartridge |    66 |            3 |
+|    4 | Iomega          |    3 | ZIP drive       |   150 |            4 |
+|    5 | Fujitsu         |    1 | Hard drive      |   500 |            5 |
+|    6 | Winchester      |    2 | Memory          |   120 |            6 |
+|    6 | Winchester      |    4 | Floppy disk     |     5 |            6 |
++------+-----------------+------+-----------------+-------+--------------+
+10 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SHOW CREATE TABLE PRODUCTS;
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                                                                                                                                                                    |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| PRODUCTS | CREATE TABLE `products` (
+  `Code` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Price` decimal(10,0) NOT NULL,
+  `Manufacturer` int(11) NOT NULL,
+  PRIMARY KEY (`Code`),
+  KEY `Manufacturer` (`Manufacturer`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+MariaDB [mytestdb]> nsert into Manufacturers values(7,'Lenovo');insert into Products values(12, '1 Tb Hard drive' , 764 , 7);insert into Products values(13, '2 Tb Hard drive' , 964 , 7);insert into Products values(14, '4 Tb Hard drive' , 1234 , 7);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'nsert into Manufacturers values(7,'Lenovo')' at line 1
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`mytestdb`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`mytestdb`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`mytestdb`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))
+MariaDB [mytestdb]> insert into Manufacturers values(7,'Lenovo');insert into Products values(12, '1 Tb Hard drive' , 764 , 7);insert into Products values(13, '2 Tb Hard drive' , 964 , 7);insert into Products values(14, '4 Tb Hard drive' , 1234 , 7);
+Query OK, 1 row affected (0.01 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    7 | Lenovo          |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> DELETE FROM MANUFACTURERS WHERE CODE=7;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`mytestdb`.`products`, CONSTRAINT `products_ibfk_1` FOREIGN KEY (`Manufacturer`) REFERENCES `manufacturers` (`Code`))MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS , PRODUCTS;
++------+-----------------+------+-----------------+-------+--------------+
+| Code | Name            | Code | Name            | Price | Manufacturer |
++------+-----------------+------+-----------------+-------+--------------+
+|    1 | Sony            |    1 | Hard drive      |   500 |            5 |
+|    2 | Creative Labs   |    1 | Hard drive      |   500 |            5 |
+|    3 | Hewlett-Packard |    1 | Hard drive      |   500 |            5 |
+|    4 | Iomega          |    1 | Hard drive      |   500 |            5 |
+|    5 | Fujitsu         |    1 | Hard drive      |   500 |            5 |
+|    6 | Winchester      |    1 | Hard drive      |   500 |            5 |
+|    7 | Lenovo          |    1 | Hard drive      |   500 |            5 |
+|    1 | Sony            |    2 | Memory          |   120 |            6 |
+|    2 | Creative Labs   |    2 | Memory          |   120 |            6 |
+|    3 | Hewlett-Packard |    2 | Memory          |   120 |            6 |
+|    4 | Iomega          |    2 | Memory          |   120 |            6 |
+|    5 | Fujitsu         |    2 | Memory          |   120 |            6 |
+|    6 | Winchester      |    2 | Memory          |   120 |            6 |
+|    7 | Lenovo          |    2 | Memory          |   120 |            6 |
+|    1 | Sony            |    3 | ZIP drive       |   150 |            4 |
+|    2 | Creative Labs   |    3 | ZIP drive       |   150 |            4 |
+|    3 | Hewlett-Packard |    3 | ZIP drive       |   150 |            4 |
+|    4 | Iomega          |    3 | ZIP drive       |   150 |            4 |
+|    5 | Fujitsu         |    3 | ZIP drive       |   150 |            4 |
+|    6 | Winchester      |    3 | ZIP drive       |   150 |            4 |
+|    7 | Lenovo          |    3 | ZIP drive       |   150 |            4 |
+|    1 | Sony            |    4 | Floppy disk     |     5 |            6 |
+|    2 | Creative Labs   |    4 | Floppy disk     |     5 |            6 |
+|    3 | Hewlett-Packard |    4 | Floppy disk     |     5 |            6 |
+|    4 | Iomega          |    4 | Floppy disk     |     5 |            6 |
+|    5 | Fujitsu         |    4 | Floppy disk     |     5 |            6 |
+|    6 | Winchester      |    4 | Floppy disk     |     5 |            6 |
+|    7 | Lenovo          |    4 | Floppy disk     |     5 |            6 |
+|    1 | Sony            |    5 | Monitor         |   240 |            1 |
+|    2 | Creative Labs   |    5 | Monitor         |   240 |            1 |
+|    3 | Hewlett-Packard |    5 | Monitor         |   240 |            1 |
+|    4 | Iomega          |    5 | Monitor         |   240 |            1 |
+|    5 | Fujitsu         |    5 | Monitor         |   240 |            1 |
+|    6 | Winchester      |    5 | Monitor         |   240 |            1 |
+|    7 | Lenovo          |    5 | Monitor         |   240 |            1 |
+|    1 | Sony            |    6 | DVD drive       |   180 |            2 |
+|    2 | Creative Labs   |    6 | DVD drive       |   180 |            2 |
+|    3 | Hewlett-Packard |    6 | DVD drive       |   180 |            2 |
+|    4 | Iomega          |    6 | DVD drive       |   180 |            2 |
+|    5 | Fujitsu         |    6 | DVD drive       |   180 |            2 |
+|    6 | Winchester      |    6 | DVD drive       |   180 |            2 |
+|    7 | Lenovo          |    6 | DVD drive       |   180 |            2 |
+|    1 | Sony            |    7 | CD drive        |    90 |            2 |
+|    2 | Creative Labs   |    7 | CD drive        |    90 |            2 |
+|    3 | Hewlett-Packard |    7 | CD drive        |    90 |            2 |
+|    4 | Iomega          |    7 | CD drive        |    90 |            2 |
+|    5 | Fujitsu         |    7 | CD drive        |    90 |            2 |
+|    6 | Winchester      |    7 | CD drive        |    90 |            2 |
+|    7 | Lenovo          |    7 | CD drive        |    90 |            2 |
+|    1 | Sony            |    8 | Printer         |   270 |            3 |
+|    2 | Creative Labs   |    8 | Printer         |   270 |            3 |
+|    3 | Hewlett-Packard |    8 | Printer         |   270 |            3 |
+|    4 | Iomega          |    8 | Printer         |   270 |            3 |
+|    5 | Fujitsu         |    8 | Printer         |   270 |            3 |
+|    6 | Winchester      |    8 | Printer         |   270 |            3 |
+|    7 | Lenovo          |    8 | Printer         |   270 |            3 |
+|    1 | Sony            |    9 | Toner cartridge |    66 |            3 |
+|    2 | Creative Labs   |    9 | Toner cartridge |    66 |            3 |
+|    3 | Hewlett-Packard |    9 | Toner cartridge |    66 |            3 |
+|    4 | Iomega          |    9 | Toner cartridge |    66 |            3 |
+|    5 | Fujitsu         |    9 | Toner cartridge |    66 |            3 |
+|    6 | Winchester      |    9 | Toner cartridge |    66 |            3 |
+|    7 | Lenovo          |    9 | Toner cartridge |    66 |            3 |
+|    1 | Sony            |   10 | DVD burner      |   180 |            2 |
+|    2 | Creative Labs   |   10 | DVD burner      |   180 |            2 |
+|    3 | Hewlett-Packard |   10 | DVD burner      |   180 |            2 |
+|    4 | Iomega          |   10 | DVD burner      |   180 |            2 |
+|    5 | Fujitsu         |   10 | DVD burner      |   180 |            2 |
+|    6 | Winchester      |   10 | DVD burner      |   180 |            2 |
+|    7 | Lenovo          |   10 | DVD burner      |   180 |            2 |
+|    1 | Sony            |   12 | 1 Tb Hard drive |   764 |            7 |
+|    2 | Creative Labs   |   12 | 1 Tb Hard drive |   764 |            7 |
+|    3 | Hewlett-Packard |   12 | 1 Tb Hard drive |   764 |            7 |
+|    4 | Iomega          |   12 | 1 Tb Hard drive |   764 |            7 |
+|    5 | Fujitsu         |   12 | 1 Tb Hard drive |   764 |            7 |
+|    6 | Winchester      |   12 | 1 Tb Hard drive |   764 |            7 |
+|    7 | Lenovo          |   12 | 1 Tb Hard drive |   764 |            7 |
+|    1 | Sony            |   13 | 2 Tb Hard drive |   964 |            7 |
+|    2 | Creative Labs   |   13 | 2 Tb Hard drive |   964 |            7 |
+|    3 | Hewlett-Packard |   13 | 2 Tb Hard drive |   964 |            7 |
+|    4 | Iomega          |   13 | 2 Tb Hard drive |   964 |            7 |
+|    5 | Fujitsu         |   13 | 2 Tb Hard drive |   964 |            7 |
+|    6 | Winchester      |   13 | 2 Tb Hard drive |   964 |            7 |
+|    7 | Lenovo          |   13 | 2 Tb Hard drive |   964 |            7 |
+|    1 | Sony            |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    2 | Creative Labs   |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    3 | Hewlett-Packard |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    4 | Iomega          |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    5 | Fujitsu         |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    6 | Winchester      |   14 | 4 Tb Hard drive |  1234 |            7 |
+|    7 | Lenovo          |   14 | 4 Tb Hard drive |  1234 |            7 |
++------+-----------------+------+-----------------+-------+--------------+
+91 rows in set (0.00 sec)
+
+
+MariaDB [mytestdb]> SELECT * FROM PET WHERE NAME LIKE '%B';
+Empty set (0.00 sec)
+
+MariaDB [mytestdb]>SELECT * FROM PRODUCTS;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
+|   12 | 1 Tb Hard drive |   764 |            7 |
+|   13 | 2 Tb Hard drive |   964 |            7 |
+|   14 | 4 Tb Hard drive |  1234 |            7 |
++------+-----------------+-------+--------------+
+13 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*) FROM PRODUCTS GROUP BY MANUFACTURER;
++----------+
+| COUNT(*) |
++----------+
+|        1 |
+|        3 |
+|        2 |
+|        1 |
+|        1 |
+|        2 |
+|        3 |
++----------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), MANUFACTURER FROM PRODUCTS GROUP BY MANUFACTURE;
+ERROR 1054 (42S22): Unknown column 'MANUFACTURE' in 'group statement'
+MariaDB [mytestdb]> SELECT COUNT(*), MANUFACTURER FROM PRODUCTS GROUP BY MANUFACTURER;
++----------+--------------+
+| COUNT(*) | MANUFACTURER |
++----------+--------------+
+|        1 |            1 |
+|        3 |            2 |
+|        2 |            3 |
+|        1 |            4 |
+|        1 |            5 |
+|        2 |            6 |
+|        3 |            7 |
++----------+--------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    7 | Lenovo          |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), MANUFACTURERN FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER;
+ERROR 1054 (42S22): Unknown column 'MANUFACTURERN' in 'field list'
+MariaDB [mytestdb]> SELECT COUNT(*), MANUFACTURER FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER;
++----------+--------------+
+| COUNT(*) | MANUFACTURER |
++----------+--------------+
+|        1 |            1 |
+|        3 |            2 |
+|        2 |            3 |
+|        1 |            4 |
+|        1 |            5 |
+|        2 |            6 |
+|        3 |            7 |
++----------+--------------+
+7 rows in set (0.01 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), P.MANUFACTURER,M.CODE FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER;
++----------+--------------+------+
+| COUNT(*) | MANUFACTURER | CODE |
++----------+--------------+------+
+|        1 |            1 |    1 |
+|        3 |            2 |    2 |
+|        2 |            3 |    3 |
+|        1 |            4 |    4 |
+|        1 |            5 |    5 |
+|        2 |            6 |    6 |
+|        3 |            7 |    7 |
++----------+--------------+------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), P.MANUFACTURER,M.NAME FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER;
++----------+--------------+-----------------+
+| COUNT(*) | MANUFACTURER | NAME            |
++----------+--------------+-----------------+
+|        1 |            1 | Sony            |
+|        3 |            2 | Creative Labs   |
+|        2 |            3 | Hewlett-Packard |
+|        1 |            4 | Iomega          |
+|        1 |            5 | Fujitsu         |
+|        2 |            6 | Winchester      |
+|        3 |            7 | Lenovo          |
++----------+--------------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), P.MANUFACTURER,M.NAME FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER HAVING MANUFACTURER<2;
++----------+--------------+------+
+| COUNT(*) | MANUFACTURER | NAME |
++----------+--------------+------+
+|        1 |            1 | Sony |
++----------+--------------+------+
+1 row in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*), P.MANUFACTURER,M.NAME FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE=P.MANUFACTURER GROUP BY MANUFACTURER HAVING COUNT(MANUFACTURER)>2;
++----------+--------------+---------------+
+| COUNT(*) | MANUFACTURER | NAME          |
++----------+--------------+---------------+
+|        3 |            2 | Creative Labs |
+|        3 |            7 | Lenovo        |
++----------+--------------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*),P.MANUFACTURER,M.NAME FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE = P.MANUFACTURER GROUP BY MANUFACTURER HAVING COUNT(*)=2;
++----------+--------------+-----------------+
+| COUNT(*) | MANUFACTURER | NAME            |
++----------+--------------+-----------------+
+|        2 |            3 | Hewlett-Packard |
+|        2 |            6 | Winchester      |
++----------+--------------+-----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT COUNT(*),P.MANUFACTURER,M.NAME FROM PRODUCTS AS P INNER JOIN MANUFACTURERS M ON M.CODE = P.MANUFACTURER GROUP BY MANUFACTURER HAVING MANUFACTURER IN(2,3);
++----------+--------------+-----------------+
+| COUNT(*) | MANUFACTURER | NAME            |
++----------+--------------+-----------------+
+|        3 |            2 | Creative Labs   |
+|        2 |            3 | Hewlett-Packard |
++----------+--------------+-----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT FROM MANUFACTURERS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM MANUFACTURERS' at line 1
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    7 | Lenovo          |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM PRODUCTS;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
+|   12 | 1 Tb Hard drive |   764 |            7 |
+|   13 | 2 Tb Hard drive |   964 |            7 |
+|   14 | 4 Tb Hard drive |  1234 |            7 |
++------+-----------------+-------+--------------+
+13 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT MANUFACTURER, COUNT(*) FROM PRODUCTS WHERE PRICE >100 GROUP BY MANUFACTURE;
+ERROR 1054 (42S22): Unknown column 'MANUFACTURE' in 'group statement'
+MariaDB [mytestdb]> SELECT MANUFACTURER, COUNT(*) FROM PRODUCTS WHERE PRICE >100 GROUP BY MANUFACTURER;
++--------------+----------+
+| MANUFACTURER | COUNT(*) |
++--------------+----------+
+|            1 |        1 |
+|            2 |        2 |
+|            3 |        1 |
+|            4 |        1 |
+|            5 |        1 |
+|            6 |        1 |
+|            7 |        3 |
++--------------+----------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT MANUFACTURER,COUNT(*),AVG(PRICE) FROM PRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURE;
+ERROR 1054 (42S22): Unknown column 'MANUFACTURE' in 'group statement'
+MariaDB [mytestdb]> SELECT MANUFACTURER,COUNT(*),AVG(PRICE) FROM PRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURER;
++--------------+----------+------------+
+| MANUFACTURER | COUNT(*) | AVG(PRICE) |
++--------------+----------+------------+
+|            1 |        1 |   240.0000 |
+|            2 |        2 |   180.0000 |
+|            3 |        1 |   270.0000 |
+|            4 |        1 |   150.0000 |
+|            5 |        1 |   500.0000 |
+|            6 |        1 |   120.0000 |
+|            7 |        3 |   987.3333 |
++--------------+----------+------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT MANUFACTURE,COUNT(*),AVG(PRICE) FROM PRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURER HAVING AVG(PRICE)>200;
+ERROR 1054 (42S22): Unknown column 'MANUFACTURE' in 'field list'
+MariaDB [mytestdb]> SELECT MANUFACTURER,COUNT(*),AVG(PRICE) FROM PRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURER HAVING AVG(PRICE)>200;
++--------------+----------+------------+
+| MANUFACTURER | COUNT(*) | AVG(PRICE) |
++--------------+----------+------------+
+|            1 |        1 |   240.0000 |
+|            3 |        1 |   270.0000 |
+|            5 |        1 |   500.0000 |
+|            7 |        3 |   987.3333 |
++--------------+----------+------------+
+4 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM MANUFACTURERS;
++------+-----------------+
+| Code | Name            |
++------+-----------------+
+|    1 | Sony            |
+|    2 | Creative Labs   |
+|    3 | Hewlett-Packard |
+|    4 | Iomega          |
+|    5 | Fujitsu         |
+|    6 | Winchester      |
+|    7 | Lenovo          |
++------+-----------------+
+7 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT * FROM PRODUCTS;
++------+-----------------+-------+--------------+
+| Code | Name            | Price | Manufacturer |
++------+-----------------+-------+--------------+
+|    1 | Hard drive      |   500 |            5 |
+|    2 | Memory          |   120 |            6 |
+|    3 | ZIP drive       |   150 |            4 |
+|    4 | Floppy disk     |     5 |            6 |
+|    5 | Monitor         |   240 |            1 |
+|    6 | DVD drive       |   180 |            2 |
+|    7 | CD drive        |    90 |            2 |
+|    8 | Printer         |   270 |            3 |
+|    9 | Toner cartridge |    66 |            3 |
+|   10 | DVD burner      |   180 |            2 |
+|   12 | 1 Tb Hard drive |   764 |            7 |
+|   13 | 2 Tb Hard drive |   964 |            7 |
+|   14 | 4 Tb Hard drive |  1234 |            7 |
++------+-----------------+-------+--------------+
+13 rows in set (0.00 sec)
+
+MariaDB [mytestdb]> SELECT MANUFACTURER,COUNT(*),AVG(PRICE) FROMPRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURER HAVING AVG(PRICE)>200;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE PRICE>100 GROUP BY MANUFACTURER HAVING AVG(PRICE)>200' at line 1
+MariaDB [mytestdb]> SELECT MANUFACTURER,COUNT(*),AVG(PRICE) FROM PRODUCTS WHERE PRICE>100 GROUP BY MANUFACTURER HAVING AVG(PRICE)>200;
++--------------+----------+------------+
+| MANUFACTURER | COUNT(*) | AVG(PRICE) |
++--------------+----------+------------+
+|            1 |        1 |   240.0000 |
+|            3 |        1 |   270.0000 |
+|            5 |        1 |   500.0000 |
+|            7 |        3 |   987.3333 |
++--------------+----------+------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
